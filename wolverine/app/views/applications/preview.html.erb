@@ -1,0 +1,27 @@
+<title>申込書データの入力完了 | Wolverine</title>
+<div id="wrap" class="wrap-form">
+  <div class="container">
+    <h2 class="headline"><i class="icon-ecommerce-receipt"></i>申込書データの入力完了</h2>
+    <div class="block-preview">
+      <h4>データの入力が完了しました</h4>
+      <p>・EXCELもしくはPDFで出力し、申込書をカンパニー宛に送信してください。<br>・お申込書フォルダにスキャンされるまで、事務局画面には登録されません。</p>
+
+      <div id="panel-preview">
+        ※ここにプレビューを表示※
+      </div><!-- / #panel-preview -->
+
+      <div class="block-preview-btn">
+        <div>
+          <a href="<%=@application.id %>.xlsx" class="btn-l btn-green">Excelで<span>出力</span></a>
+          <a href="<%=@application.id %>.pdf" class="btn-l btn-orange">PDFで<span>出力</span></a>
+        </div>
+        <div>
+          <a href="./new" class="btn-l btn-blue">続けて作成</a>
+        </div>
+      </div><!-- / .block-preview-btn -->
+
+    </div><!-- / .block-preview -->
+  </div><!-- / .container -->
+  <p class="link"><a href="./" class="link-top">← TOPへ戻る</a></p>
+</div><!-- / #wrap -->
+

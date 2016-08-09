@@ -1,0 +1,47 @@
+<title>基本情報の登録 | Wolverine</title>
+<div id="wrap" class="wrap-form">
+  <div class="container">
+    <h2 class="headline"><i class="icon-basic-sheet-pen"></i>申込書の作成</h2>
+    <% @action = @params[:action] == 'copy' ? 'copy_app' : 'edit_app' %>
+    <%= form_tag('/applications/' + @action, method: :post) do %>
+      <h3><span class="num">1</span>基本情報の登録</h3>
+      <table class="block-default">
+        <tr>
+          <th>申込書の種類<span class="rq">必須</span></th>
+          <td>
+            <select name="q[application_type]" id="entry-category" class="wid-m s-required">
+              <option value="0">－</option>
+            <% @app_types.each do |key, value| %>
+              <% @selected = key == @app.application_type ? 'selected' : '' %>
+              <option value=<%= key %> <%= @selected %>><%= value %></option>
+            <% end %>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <th>営業名<span class="rq">必須</span></th>
+          <td>
+            <select name="q[sales_name]" class="wid-m s-required">
+              <option value="0">－</option>
+            <% @staff_names.each do |staff| %>
+              <% @selected = staff.staff_code == @app.sales_name ? 'selected' : '' %>
+              <option value=<%=staff.staff_code%> <%= @selected %>><%=staff.staff_name%></option>
+            <% end %>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <th>処理方法</th>
+          <% @checked = @app.inhouse == 1 ? 'checked' : '' %>
+          <td><input type="checkbox" name="q[inhouse]" value="1" id="check01" <%= @checked %>><label for="check01">社内処理のみ</label></td>
+        </tr>
+      </table><!-- / .block-default -->
+      <div class="block-btn">
+        <button id="submit-create" type="submit" class="btn-blue btn-l">次へ</button>
+      </div><!-- / .block-btn -->
+      <input type="hidden" name="q[id]" value=<%= @app.id %>>
+    <% end %>
+  </div><!-- / .container -->
+  <p class="link"><a href="/" class="link-top">← TOPへ戻る</a></p>
+</div><!-- / #wrap -->
+

@@ -1,0 +1,161 @@
+<title>TOP | Wolverine</title>
+
+<div id="wrap" class="wrap-index">
+  <div class="container">
+    <section class="block-link">
+      <h2><a href="./applications/new">新規作成</a></h2>
+      <p>申込書の新規作成はこちら</p>
+      <i class="icon-basic-sheet-pen"></i>
+    </section>
+    <section class="block-link">
+      <h2><a href="./applications/upload">過去データから作成</a></h2>
+      <p>過去の申込書をアップロードして作成する場合はこちら</p>
+      <i class="icon-basic-todo-txt"></i>
+    </section>
+    <section>
+      <h2>申込書の検索</h2>
+      <%= search_form_for @q, url: search_applications_path, html: { method: :post } do |f| %>
+        <table class="block-search">
+          <tr>
+            <th>CID</th>
+            <td><%= f.search_field :cid_cont %></td>
+            <th>クライアント名</th>
+            <td><%= f.search_field :company_name_cont %></td>
+            <th>対応状況</th>
+            <td>
+              <%= f.check_box :draft_true %><label for="check01">一時保存中のみ</label>
+            </td>
+          </tr>
+          <tr>
+            <th>サイト名</th>
+            <td>
+              <select name="q[applic_category_eq]">
+                <option value="">－</option>
+                <option value="1">ミドルの転職</option>
+                <option value="2">エン転職DB</option>
+              </select>
+            </td>
+            <th>申込書タイプ</th>
+            <td>
+              <select name="q[application_type_eq]">
+                <option value="">－</option>
+                <option value="1">月額固定</option>
+                <option value="2">完全成功報酬型</option>
+                <option value="3">月額固定＋成功報酬型</option>
+                <option value="4">成功報酬フィー</option>
+                <option value="5">ハイクラス・エグゼクティブのみ成功報酬</option>
+              </select>
+            </td>
+            <th>営業名</th>
+            <td>
+              <select name="q[sales_name_eq]">
+                <option value="">－</option>
+                <option value="2060479">高岡麻子</option>
+                <option value="2080221">重岡陽子</option>
+                <option value="2090126">金丸瑞生</option>
+                <option value="2120066">藤原美紀</option>
+                <option value="2140148">田代勝大</option>
+                <option value="2060057">梶原英哲</option>
+                <option value="2050096">山口愛</option>
+                <option value="2100100">木暮成士</option>
+                <option value="2130126">小林浩平</option>
+                <option value="2050034">天野博文</option>
+                <option value="2130142">津田有希子</option>
+                <option value="2150074">馬屋原彩</option>
+                <option value="2150412">東公美子</option>
+                <option value="2160118">島田愛</option>
+                <option value="2120124">加陽崇仁</option>
+              </select>
+            </td>
+          </tr>
+
+          <tr>
+            <th>納品日</th>
+            <td colspan="5" class="date">
+
+              <select id="q_contents_delivery_date_gteq_1i" name="q[contents_delivery_date_gteq(1i)]" class="select-m">
+                <option value="">－</option>
+              <% for num in 2015..2016 do %>
+                <option value=<%= num %>><%= num%></option>
+              <% end %>
+              </select> 年
+              <select id="q_contents_delivery_date_gteq_2i" name="q[contents_delivery_date_gteq(2i)]" class="select-s">
+                <option value="">－</option>
+              <% for num in 1..12 do %>
+                <option value=<%= sprintf("%02d",num) %>><%= num %></option>
+              <% end %>
+              </select> 月
+              <select id="q_contents_delivery_date_gteq_3i" name="q[contents_delivery_date_gteq(3i)]" class="select-s">
+                <option value="">－</option>
+              <% for num in 1..31 do %>
+                <option value=<%= sprintf("%02d",num) %>><%= num %></option>
+              <% end %>
+              </select> 日<span class="bar">～</span>
+              <select id="q_contents_delivery_date_lteq_1i" name="q[contents_delivery_date_lteq(1i)]" class="select-m">
+                <option value="">－</option>
+              <% for num in 2015..2016 do %>
+                <option value=<%= num %>><%= num %></option>
+              <% end %>
+              </select> 年
+              <select id="q_contents_delivery_date_lteq_2i" name="q[contents_delivery_date_lteq(2i)]" class="select-s">
+                <option value="">－</option>
+              <% for num in 1..12 do %>
+                <option value=<%= sprintf("%02d",num) %>><%= num %></option>
+              <% end %>
+              </select> 月
+              <select id="q_contents_delivery_date_lteq_3i" name="q[contents_delivery_date_lteq(3i)]" class="select-s">
+                <option value="">－</option>
+              <% for num in 1..31 do %>
+                <option value=<%= sprintf("%02d",num) %>><%= num %></option>
+              <% end %>
+              </select> 日
+            </td>
+          </tr>
+
+          <tr>
+            <th>登録日</th>
+            <td colspan="5" class="date">
+              <select id="q_created_at_gteq_1i" name="q[created_at_gteq(1i)]" class="select-m">
+                <option value="">－</option>
+              <% for num in 2015..2016 do %>
+                <option value=<%= num %>><%= num %></option>
+              <% end %>
+              </select> 年
+              <select id="q_created_at_gteq_2i" name="q[created_at_gteq(2i)]" class="select-s">
+                <option value="">－</option>
+              <% for num in 1..12 do %>
+                <option value=<%= sprintf("%02d",num) %>><%= num %></option>
+              <% end %>
+              </select> 月
+              <select id="q_created_at_gteq_3i" name="q[created_at_gteq(3i)]" class="select-s">
+                <option value="">－</option>
+              <% for num in 1..31 do %>
+                <option value=<%= sprintf("%02d",num) %>><%= num %></option>
+              <% end %>
+              </select> 日<span class="bar">～</span>
+              <select id="q_created_at_lteq_1i" name="q[created_at_lteq(1i)]" class="select-m">
+                <option value="">－</option>
+              <% for num in 2015..2016 do %>
+                <option value=<%= num %>><%= num %></option>
+              <% end %>
+              </select> 年
+              <select id="q_created_at_lteq_2i" name="q[created_at_lteq(2i)]" class="select-s">
+                <option value="">－</option>
+              <% for num in 1..12 do %>
+                <option value=<%= sprintf("%02d",num) %>><%= num %></option>
+              <% end %>
+              </select> 月
+              <select id="q_created_at_lteq_3i" name="q[created_at_lteq(3i)]" class="select-s">
+                <option value="">－</option>
+              <% for num in 1..31 do %>
+                <option value=<%= sprintf("%02d",num) %>><%= num %></option>
+              <% end %>
+              </select> 日
+            </td>
+          </tr>
+        </table><!-- / .block-search -->
+        <button type="submit" name="commit" id="btn-smt" class="btn-blue btn-l">検索する</button>
+      <% end %>
+    </section>
+  </div><!-- / .container -->
+</div><!-- / #wrap -->

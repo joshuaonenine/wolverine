@@ -1,0 +1,42 @@
+<title>基本情報の登録 | Wolverine</title>
+<div id="wrap" class="wrap-form">
+  <div class="container">
+    <h2 class="headline"><i class="icon-basic-sheet-pen"></i>申込書の作成</h2>
+    <%= form_tag('/applications/edit_applic', method: :post) do %>
+      <h3><span class="num">1</span>基本情報の登録</h3>
+      <table class="block-default">
+        <tr>
+          <th>申込書の種類<span class="rq">必須</span></th>
+          <td>
+            <select name="q[application_type]" id="entry-category" class="wid-m s-required">
+              <option value="0">－</option>
+            <% @app_types.each do |key, value| %>
+              <option value=<%= key %>><%= value %></option>
+            <% end %>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <th>営業名<span class="rq">必須</span></th>
+          <td>
+            <select name="q[sales_name]" class="wid-m s-required">
+              <option value="0">－</option>
+            <% @staff_names.each do |staff| %>
+              <option value=<%=staff.staff_code%>><%=staff.staff_name%></option>
+            <% end %>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <th>処理方法</th>
+          <td><input type="checkbox" name="q[inhouse]" value="1" id="check01"><label for="check01">社内処理のみ</label></td>
+        </tr>
+      </table><!-- / .block-default -->
+      <div class="block-btn">
+        <button id="submit-create" type="submit" class="btn-blue btn-l">次へ</button>
+      </div><!-- / .block-btn -->
+    <% end %>
+  </div><!-- / .container -->
+  <p class="link"><a href="/" class="link-top">← TOPへ戻る</a></p>
+</div><!-- / #wrap -->
+

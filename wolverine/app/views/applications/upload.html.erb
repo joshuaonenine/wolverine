@@ -1,0 +1,14 @@
+<title>申込書のアップロード | Wolverine</title>
+<div id="wrap" class="wrap-upload">
+  <div class="container">
+    <h2 class="headline"><i class="icon-basic-upload"></i>申込書のアップロード</h2>
+    <%= form_tag(import_applications_path, :method => :post, multipart: true) do %>
+      <p>アップロードする申込書を選択してください</p>
+      <div>
+        <%= file_field_tag :csv_file, class: 'file-required' %>
+      </div>
+      <button type="submit" class="btn-l btn-blue btn-submit">アップロード</button>
+    <% end %>
+  </div><!-- / .container -->
+  <p class="link"><a href="/" class="link-top">← TOPへ戻る</a></p>
+</div><!-- / #wrap -->

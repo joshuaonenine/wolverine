@@ -1,0 +1,448 @@
+wb = xlsx_package.workbook
+setup = {:fit_to_width => 10, :orientation => :landscape, :paper_size => 9}
+xlsx_package.use_autowidth = false
+
+styles = wb.styles
+header     = styles.add_style :bg_color => "ffffc0", :alignment => {:horizontal => :center}, :border=> {:style => :thin, :color => "FF000000"}
+info     = styles.add_style :sz => 8, :alignment => {:wrap_text => true}
+center = styles.add_style :alignment => { :horizontal => :center }
+bold = styles.add_style :b => true
+col_header = styles.add_style :sz => 9, :border=> {:style => :thin, :color => "FF000000"}
+text_label      = styles.add_style :sz => 9
+right = styles.add_style :alignment => { :horizontal => :right }
+border_left = styles.add_style :border => {:style => :thin, :color => "FF000000", :edges => [:left]}, :sz => 9
+border_bottom = styles.add_style :border => {:style => :thin, :color => "FF000000", :edges => [:bottom]}, :sz => 9
+border_bottom_m = styles.add_style :border => {:style => :medium, :color => "FF000000", :edges => [:bottom]}, :sz => 9
+border_left_m = styles.add_style :border => {:style => :medium, :color => "FF000000", :edges => [:left]}, :sz => 9
+vertical_text = styles.add_style :sz => 6, :fg_color => "C0C0C0", :alignment => {:horizontal => :center, :vertical => :center, :textRotation => 255}
+grey_text = styles.add_style :sz => 9, :fg_color => "C0C0C0"
+
+
+wb.styles.fonts.first.name = 'MS ゴシック'
+wb.add_worksheet(name: "Applications") do |sheet|      
+sheet.column_widths *([2]*sheet.column_info.count)
+
+  sheet.sheet_view.show_grid_lines = false
+  8.times {sheet.add_row Array.new(65, '')}
+  1.times {sheet.add_row Array.new(65, ''), :height => 25}
+  1.times {sheet.add_row Array.new(65, '')}
+  1.times {sheet.add_row Array.new(65, ''), :height => 25}
+  2.times {sheet.add_row Array.new(65, '')}
+  1.times {sheet.add_row Array.new(65, ''), :height => 25}
+  20.times {sheet.add_row Array.new(65, '')}
+  1.times {sheet.add_row Array.new(65, ''), :height => 25}
+  11.times {sheet.add_row Array.new(65, '')}
+
+  sheet.rows[0].cells[28].value = "申 　込 　書"
+  sheet.rows[0].cells[28].style = styles.add_style :b => true, :sz => 20
+
+  sheet.merge_cells 'A2:X3'
+  sheet.rows[1].cells[0].style = info
+
+  sheet.merge_cells 'AY3:BB3'
+  sheet.rows[2].cells[47].value = "申込日"
+  sheet.rows[2].cells[54].value = "年"
+  sheet.merge_cells 'BD3:BF3'
+  sheet.rows[2].cells[58].value = "月"
+  sheet.merge_cells 'BH3:BJ3'
+  sheet.rows[2].cells[62].value = "日"
+
+  for num in 55..64
+    sheet.rows[5].cells[num].style = col_header
+  end
+
+  for num in 11..31
+    sheet.rows[4].cells[num].style = col_header
+  end
+  sheet.rows[4].cells[7].value = "新"
+  sheet.rows[4].cells[7].style = text_label
+  sheet.rows[4].cells[12].value = "現"
+  sheet.rows[4].cells[12].style = text_label
+  sheet.rows[4].cells[25].value = "区分"
+  sheet.rows[4].cells[25].style = text_label
+  sheet.merge_cells 'I5:L5'
+  sheet.merge_cells 'Z5:AA5'
+  sheet.merge_cells 'AB5:AF5'
+  sheet.rows[4].cells[7].style = header
+  sheet.rows[4].cells[8].style = header
+  sheet.rows[4].cells[12].style = header
+  sheet.rows[4].cells[25].style = col_header
+  sheet.rows[4].cells[27].style = header
+
+  sheet.merge_cells 'A6:F6'
+  sheet.rows[5].cells[0].style = center
+  sheet.rows[5].cells[0].style = bold
+  sheet.rows[5].cells[0].value = "≪掲載先≫"
+  sheet.merge_cells 'H6:L6'
+  sheet.merge_cells 'M6:S6'
+  sheet.merge_cells 'T6:Y6'
+  sheet.merge_cells 'Z6:AF6'
+  sheet.rows[5].cells[7].style = center
+  sheet.rows[5].cells[7].value = "CID"
+  sheet.rows[5].cells[12].value = @application.cid
+  sheet.rows[5].cells[7].style = text_label
+  sheet.rows[5].cells[19].value = "アカウント上限数"
+  sheet.rows[5].cells[19].style = text_label
+
+  for num in 11..31
+    sheet.rows[5].cells[num].style = col_header
+  end
+
+  for num in 4..31
+    sheet.rows[8].cells[num].style = right
+  end
+
+  for num in 8..11
+    sheet.merge_cells 'A' + num.to_s + ':' + 'D' + num.to_s
+    sheet.merge_cells 'E' + num.to_s + ':' + 'AC' + num.to_s
+  end
+
+  sheet.merge_cells 'A12:D12'
+  sheet.merge_cells 'A13:D14'
+  sheet.merge_cells 'A15:D17'
+  sheet.merge_cells 'A18:D19'
+
+  sheet.rows[5].cells[7].style = styles.add_style :alignment => { :horizontal => :center }, :border=> {:style => :thin, :color => "FF000000"}
+  sheet.rows[5].cells[12].style = header
+  #sheet.rows[5].cells[25].style = header
+  sheet.rows[5].cells[12].style = header
+
+  sheet.merge_cells 'G12:H12'
+  sheet.rows[11].cells[4].value = "TEL"
+  sheet.rows[11].cells[8].value = "("
+  sheet.rows[11].cells[12].value = ")"
+
+  sheet.merge_cells 'J12:L12'
+  sheet.merge_cells 'N12:R12'
+  sheet.rows[11].cells[18].value = "FAX"
+  sheet.merge_cells 'U12:V12'
+  sheet.rows[11].cells[22].value = "("
+  sheet.merge_cells 'X12:Z12'
+  sheet.rows[11].cells[26].value = ")"
+  sheet.merge_cells 'AB12:AF12'
+  sheet.merge_cells 'E13:O13'
+  sheet.merge_cells 'P13:AF13'
+  sheet.merge_cells 'E15:O15'
+  #sheet.merge_cells 'P16:AF17'
+  sheet.merge_cells 'A18:D19'
+  sheet.merge_cells 'E18:E19'
+  sheet.merge_cells 'F18:G19'
+  sheet.merge_cells 'H18:H19'
+  sheet.merge_cells 'I18:J19'
+  sheet.merge_cells 'K18:K19'
+  sheet.merge_cells 'L18:M19'
+  sheet.merge_cells 'N18:N19'
+  sheet.merge_cells 'O18:O19'
+  sheet.merge_cells 'P18:P19'
+  sheet.merge_cells 'Q18:R19'
+  sheet.merge_cells 'S18:S19'
+  sheet.merge_cells 'T18:T19'
+  sheet.merge_cells 'U18:U19'
+  sheet.merge_cells 'V18:X19'
+  sheet.merge_cells 'Y18:AD19'
+  sheet.merge_cells 'AE18:AE19'
+  sheet.merge_cells 'AF18:AF19'
+
+  sheet.rows[17].cells[4].value = "("
+  sheet.rows[17].cells[7].value = ")"
+  sheet.rows[17].cells[8].value = "日締"
+  sheet.rows[17].cells[10].value = "("
+  sheet.rows[17].cells[14].value = ")"
+  sheet.rows[17].cells[15].value = "月"
+  sheet.rows[17].cells[16].value = "("
+  sheet.rows[17].cells[19].value = ")"
+  sheet.rows[17].cells[20].value = "日払"
+  sheet.rows[17].cells[21].value = "決算月"
+
+  for num in 7..12
+    sheet.rows[num].cells[0].style = border_bottom
+    sheet.rows[num].cells[29].style = border_bottom
+    sheet.rows[num].cells[30].style = border_bottom
+    sheet.rows[num].cells[31].style = border_bottom
+    sheet.rows[3].cells[num].style = border_bottom
+    sheet.rows[29].cells[num].style = border_bottom
+  end
+
+  sheet.rows[7].cells[0].value = "ﾌﾘｶﾞﾅ"
+  @company = (@application.application_type == '1' ||  @application.application_type == '6') ? '御 社 名' : '会 社 名'
+  sheet.rows[8].cells[0].value = @company
+  sheet.rows[9].cells[0].value = "ﾌﾘｶﾞﾅ"
+  sheet.rows[10].cells[0].value = "所 在 地"
+  sheet.rows[11].cells[0].value = "TEL／FAX"
+  sheet.rows[12].cells[0].value = "御責任者"
+  sheet.rows[12].cells[4].value = "役職名：　　"
+
+  for row_num in 12..18
+    for num in 0..31
+      next if (row_num == 12 && num != 0) || row_num == 13 || row_num == 14 || row_num == 15 || row_num == 17
+      sheet.rows[row_num].cells[num].style = col_header
+    end
+  end
+
+  for num in 11..17
+    sheet.rows[num].cells[4].style = border_left
+  end
+
+  for num in 15..31
+    sheet.rows[12].cells[num].style = border_bottom
+    sheet.rows[14].cells[num].style = border_bottom
+  end
+
+  sheet.rows[17].cells[21].style = border_left
+
+  for num in 4..31
+    sheet.rows[11].cells[num].style = border_bottom
+    sheet.rows[13].cells[num].style = border_bottom
+    sheet.rows[16].cells[num].style = border_bottom if num < 15
+  end
+
+  for num in 0..3
+    sheet.rows[13].cells[num].style = border_bottom
+  end
+
+  for num in 15..31
+    sheet.rows[13].cells[num].style = border_bottom
+    sheet.rows[16].cells[num].style = border_bottom
+  end
+
+  sheet.rows[11].cells[4].style = styles.add_style :border => {:style => :thin, :color => "FF000000", :edges => [:bottom, :left]}
+  sheet.rows[13].cells[4].style = styles.add_style :border => {:style => :thin, :color => "FF000000", :edges => [:bottom, :left]}
+
+  for num in 0..31
+    sheet.rows[6].cells[num].style = border_bottom_m
+    sheet.rows[18].cells[num].style = border_bottom_m
+  end
+
+  for num in 7..18
+    sheet.rows[num].cells[32].style = border_left_m
+  end
+
+  sheet.merge_cells 'E16:O17'
+  sheet.rows[12].cells[4].value = "役職名：　　"
+  sheet.rows[14].cells[0].value = "御担当者"
+  sheet.rows[17].cells[0].value = "支払規定"
+  sheet.rows[12].cells[15].value = "ﾌﾘｶﾞﾅ"
+
+  sheet.rows[14].cells[4].value = "役職名：　　"
+  sheet.rows[14].cells[15].value = "ﾌﾘｶﾞﾅ"
+
+  for num in 7..10
+    sheet.rows[num].cells[4].style = styles.add_style :sz => 9, :border => {:style => :thin, :color => "FF000000", :edges => [:bottom, :left]}
+  end
+
+  for row_num in 7..15
+    for num in 33..64
+      sheet.rows[row_num].cells[num].style = col_header
+    end
+  end
+
+  sheet.merge_cells 'AH8:BM16'
+
+  sheet.merge_cells 'AD9:AF9'
+  sheet.merge_cells 'AD14:AF14'
+  sheet.merge_cells 'AD16:AF17'
+
+  sheet.rows[8].cells[29].value = "印"
+  sheet.rows[13].cells[29].value = "印"
+  sheet.rows[15].cells[29].value = "印"
+
+  sheet.rows[7].cells[33].style = styles.add_style :sz => 6,  :alignment => {:vertical => :justify}, :border => {:style => :thin, :color => "FF000000"}
+
+  sheet.rows[7].cells[33].value = ""
+
+  for row_num in 17..18
+    for num in 33..44
+      sheet.rows[row_num].cells[num].style = col_header
+    end
+  end
+
+  sheet.merge_cells 'AH18:AK19'
+  sheet.merge_cells 'AL18:AS19'
+  sheet.rows[17].cells[33].value = "支払方法"
+  sheet.rows[17].cells[37].value = "振 込・（　　　）"
+
+  for row_num in 17..18
+    for num in 48..64
+      sheet.rows[row_num].cells[num].style = col_header
+    end
+  end
+
+  sheet.merge_cells 'AW18:AZ19'
+  sheet.merge_cells 'BA18:BM19'
+  sheet.rows[17].cells[48].value = "業種コード"
+
+  for row_num in 21..38
+    for num in 0..64
+      sheet.rows[row_num].cells[num].style = col_header
+    end
+  end
+
+  sheet.merge_cells 'A22:E22'
+  sheet.merge_cells 'F22:Q22'
+  if @application.application_type == '1' then
+    sheet.merge_cells 'R22:AG22'
+  else
+    sheet.merge_cells 'R22:AL22'
+  end
+
+  sheet.merge_cells 'AH22:AL22'
+  sheet.merge_cells 'AM22:AP22'
+  sheet.merge_cells 'AQ22:AW22'
+  sheet.merge_cells 'AX22:BA22'
+  sheet.merge_cells 'BB22:BE22'
+  sheet.merge_cells 'BF22:BM22'
+
+  sheet.rows[21].cells[0].value = "商品コード"
+  sheet.rows[21].cells[5].value = "商品名"
+  sheet.rows[21].cells[17].value = "企画内容"
+  sheet.rows[21].cells[33].value = "備考"
+  sheet.rows[21].cells[38].value = "納品日"
+  sheet.rows[21].cells[42].value = "金額"
+  sheet.rows[21].cells[49].value = "請求日"
+  sheet.rows[21].cells[53].value = "支払日"
+  sheet.rows[21].cells[57].value = "弊社記入欄"
+
+  for n in 0..5
+   num = (n * 2) + 23
+   num2 = num + 1
+   sheet.merge_cells 'A' + num.to_s + ':' + 'E' + num2.to_s
+  end
+
+  for n in 0..5
+   num = (n * 2) + 23
+   num2 = num + 1
+   sheet.merge_cells 'F' + num.to_s + ':' + 'Q' + num2.to_s
+  end
+
+  for n in 0..5
+   num = (n * 2) + 23
+   num2 = num + 1
+   if @application.application_type == '1'
+     sheet.merge_cells 'R' + num.to_s + ':' + 'AG' + num2.to_s
+   else
+     sheet.merge_cells 'R' + num.to_s + ':' + 'AL' + num2.to_s
+   end
+   sheet.rows[num - 1].cells[17].style = header
+  end
+
+  for n in 0..5
+   num = (n * 2) + 23
+   num2 = num + 1
+   sheet.merge_cells 'AH' + num.to_s + ':' + 'AL' + num2.to_s
+   sheet.rows[num - 1].cells[33].style = header
+  end
+
+  for n in 0..5
+   num = (n * 2) + 23
+   num2 = num + 1
+   sheet.merge_cells 'AM' + num.to_s + ':' + 'AP' + num2.to_s
+   sheet.rows[num - 1].cells[38].style = header
+  end
+
+  for n in 0..5
+   num = (n * 2) + 23
+   num2 = num + 1
+   sheet.merge_cells 'AQ' + num.to_s + ':' + 'AW' + num2.to_s
+   sheet.rows[num - 1].cells[42].style = header
+  end
+
+  for n in 0..5
+   num = (n * 2) + 23
+   num2 = num + 1
+   sheet.merge_cells 'AX' + num.to_s + ':' + 'BA' + num2.to_s
+   sheet.rows[num - 1].cells[49].style = header
+  end
+
+  for n in 0..5
+   num = (n * 2) + 23
+   num2 = num + 1
+   sheet.merge_cells 'BB' + num.to_s + ':' + 'BE' + num2.to_s
+   sheet.rows[num - 1].cells[53].style = header
+  end
+
+  for num in 23..34
+   sheet.merge_cells 'BF' + num.to_s + ':' + 'BM' + num.to_s
+  end
+
+  sheet.merge_cells 'A35:AL38'
+  sheet.merge_cells 'AM35:AP35'
+  sheet.merge_cells 'AQ35:AW35'
+  sheet.merge_cells 'AX35:AZ35'
+  sheet.merge_cells 'BA35:BF35'
+  sheet.merge_cells 'BG35:BH35'
+  sheet.merge_cells 'BI35:BM35'
+
+  sheet.merge_cells 'AM36:AP37'
+  sheet.merge_cells 'AQ36:AW37'
+  sheet.merge_cells 'AX36:BA36'
+  sheet.merge_cells 'BB36:BE36'
+  sheet.merge_cells 'BF36:BI36'
+  sheet.merge_cells 'BJ36:BM36'
+
+  sheet.merge_cells 'AM38:AP39'
+  sheet.merge_cells 'AQ38:AW39'
+  sheet.merge_cells 'AX37:BA39'
+  sheet.merge_cells 'BB37:BE39'
+  sheet.merge_cells 'BF37:BI39'
+  sheet.merge_cells 'BJ37:BM39'
+
+
+  if @application.application_type == '1' then 
+    sheet.merge_cells 'A39:F39'
+    sheet.merge_cells 'S39:AL39'
+    sheet.merge_cells 'A40:A43'
+
+    sheet.rows[34].cells[0].style = header
+    sheet.rows[38].cells[18].style = header
+    sheet.rows[36].cells[49].style = header
+  else
+    sheet.merge_cells 'A35:AL39'
+  end
+
+  if @application.application_type == '1' then 
+    sheet.rows[38].cells[0].value = "申込番号"
+    sheet.rows[38].cells[12].value = "-"
+    sheet.rows[39].cells[0].style = vertical_text
+    sheet.rows[39].cells[0].value = "【弊社記入欄】"
+
+    sheet.rows[39].cells[1].value = "必着日指定"
+    sheet.rows[39].cells[5].value = "：　□無 ※請求日から3営業日以内に投函　　□有[ 　     　　        　 ] ※指定日の3営業日前までに投函"
+
+    sheet.rows[40].cells[1].value = "請求先指定"
+    sheet.rows[40].cells[5].value = "：　□会社（御中）　　□部署（御中）　　□御担当者（様）"
+
+    sheet.rows[41].cells[1].value = "会社区分"
+    sheet.rows[41].cells[5].value = "：　□新　　□継　　□復　　□OP"
+
+    sheet.rows[42].cells[1].value = "各種区分"
+    sheet.rows[41].cells[5].value = "：　□差替"
+  end
+
+  for num in 39..42
+    sheet.rows[num].cells[1].style = grey_text
+    sheet.rows[num].cells[5].style = grey_text
+  end
+
+  sheet.rows[34].cells[38].value = "小　計"
+  sheet.rows[35].cells[38].value = "消費税"
+  sheet.rows[37].cells[38].value = "合計"
+
+  sheet.rows[34].cells[49].value = "担当"
+  @text = "拠点"
+  if @application.application_type == '2' then
+    @text = "所属"
+    sheet.rows[34].cells[59].value = "紹介会社支援"
+  end
+  sheet.rows[34].cells[58].value = @text
+  sheet.rows[35].cells[49].value = "担当者"
+  sheet.rows[35].cells[53].value = "承認"
+  sheet.rows[35].cells[57].value = "処理"
+  sheet.rows[35].cells[61].value = "経理"
+
+  if @application.application_type == '2' then
+    sheet.rows[35].cells[57].value = "入力"
+    sheet.rows[35].cells[61].value = "請求"
+  end
+
+sheet.column_widths *([2]*sheet.column_info.count)
+end

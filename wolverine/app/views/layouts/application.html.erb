@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+
+</head>
+<body>
+    <header>
+        <nav>
+            <% if user_signed_in? %>
+                <strong<%#= link_to current_user.email, home_show_path %></strong>
+                <%#= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
+            <% else %>
+                <%#= link_to 'サインアップ', new_user_registration_path %>
+                <%#= link_to 'ログイン', new_user_session_path %>
+            <% end %>
+        </nav>
+        <a href="/"><h1>Wolverine</h1></a>
+
+    </header>
+
+
+
+
+    <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
+
+
+<%= yield %>
+<footer>
+  <p>&copy; 2016 enjapan inc.</p>
+</footer>
+
+</body>
+</html>

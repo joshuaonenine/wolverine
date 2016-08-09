@@ -1,0 +1,23 @@
+<title>ログイン | Wolverine</title>
+<body>
+<div class="wrap-login">
+  <div class="container">
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+    <span>W</span>
+    <div class="block-ipt">
+      <p>ユーザーID</p>
+	  <div>
+	    <%= f.email_field :email, autofocus: true %>
+      </div>
+      <p>パスワード</p>
+      <div>
+        <%= f.password_field :password, autocomplete: "off" %>
+      </div>
+    </div><!-- / .block-ipt -->
+    <div>
+      <button type="submit" class="btn-l btn-blue btn-submit">ログイン</button>
+    </div>
+    <% end %>
+  </div><!-- / .container -->
+</div><!-- / #wrap -->
+</body>
