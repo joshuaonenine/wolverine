@@ -119,13 +119,7 @@ class ApplicationsController < ApplicationController
     @application.save
 
     save_contents(@params, @application.id) if params[:contents]
-
-    if @params[:q][:draft] == "0"
-       render "preview"
-    else 
-       render "save_draft"
-    end
-
+    @params[:q][:draft] == "0" ? render "preview" : render "save_draft"
   end
 
   def copy
@@ -152,12 +146,7 @@ class ApplicationsController < ApplicationController
     @application.update(save_applic_params(@params))
 
     update_contents(@params, @application.id) if params[:contents]
-
-    if @params[:q][:draft] == "0"
-      render "preview"
-    else
-      render "save_draft"
-    end
+    @params[:q][:draft] == "0" ? render "preview" : render "save_draft"
 
   end
 
